@@ -1,0 +1,184 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:HealthOptimizer.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1120" d:DesignHeight="900"
+             x:Class="HealthOptimizer.Views.StrengthProgressView"
+             x:DataType="vm:StrengthProgressViewModel"
+             Background="#F5F7FA">
+
+	<ScrollViewer>
+		<StackPanel Margin="40" Spacing="32">
+
+			<!-- Page Header -->
+			<StackPanel Spacing="8">
+				<TextBlock Text="Strength Progress"
+						   FontSize="36"
+						   FontWeight="Bold"
+						   Foreground="#1E293B"/>
+				<TextBlock Text="Track your lifting gains over time"
+						   FontSize="16"
+						   Foreground="#64748B"/>
+			</StackPanel>
+
+			<!-- Exercise Selection -->
+			<Border Background="White"
+					Padding="32"
+					CornerRadius="16"
+					BoxShadow="0 1 3 0 #15000000">
+				<StackPanel Spacing="12">
+					<TextBlock Text="Select Exercise"
+							   FontSize="16"
+							   FontWeight="SemiBold"
+							   Foreground="#475569"/>
+					<ComboBox ItemsSource="{Binding AvailableExercises}"
+							  SelectedItem="{Binding SelectedExercise}"
+							  MinWidth="350"
+							  Height="44"
+							  HorizontalAlignment="Left"/>
+				</StackPanel>
+			</Border>
+
+			<!-- Stats Cards -->
+			<Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto">
+
+				<Border Grid.Column="0"
+						Background="White"
+						Padding="24"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000"
+						Margin="0,0,12,0">
+					<StackPanel Spacing="8">
+						<TextBlock Text="CURRENT E1RM"
+								   FontSize="13"
+								   FontWeight="SemiBold"
+								   Foreground="#64748B"/>
+						<TextBlock Text="{Binding CurrentE1RM, StringFormat='{}{0:F1} lbs'}"
+								   FontSize="32"
+								   FontWeight="Bold"
+								   Foreground="#3B82F6"/>
+					</StackPanel>
+				</Border>
+
+				<Border Grid.Column="1"
+						Background="White"
+						Padding="24"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000"
+						Margin="6,0,6,0">
+					<StackPanel Spacing="8">
+						<TextBlock Text="ALL-TIME PR"
+								   FontSize="13"
+								   FontWeight="SemiBold"
+								   Foreground="#64748B"/>
+						<TextBlock Text="{Binding AllTimePR, StringFormat='{}{0:F1} lbs'}"
+								   FontSize="32"
+								   FontWeight="Bold"
+								   Foreground="#F59E0B"/>
+					</StackPanel>
+				</Border>
+
+				<Border Grid.Column="2"
+						Background="White"
+						Padding="24"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000"
+						Margin="6,0,6,0">
+					<StackPanel Spacing="8">
+						<TextBlock Text="PROGRESS"
+								   FontSize="13"
+								   FontWeight="SemiBold"
+								   Foreground="#64748B"/>
+						<TextBlock Text="{Binding PercentChange, StringFormat='{}{0:+0.0;-0.0;0}%'}"
+								   FontSize="32"
+								   FontWeight="Bold"
+								   Foreground="#10B981"/>
+						<TextBlock Text="Last 8 weeks"
+								   FontSize="11"
+								   Foreground="#94A3B8"/>
+					</StackPanel>
+				</Border>
+
+				<Border Grid.Column="3"
+						Background="White"
+						Padding="24"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000"
+						Margin="12,0,0,0">
+					<StackPanel Spacing="8">
+						<TextBlock Text="TOTAL SETS"
+								   FontSize="13"
+								   FontWeight="SemiBold"
+								   Foreground="#64748B"/>
+						<TextBlock Text="{Binding TotalSetsLogged}"
+								   FontSize="32"
+								   FontWeight="Bold"
+								   Foreground="#8B5CF6"/>
+						<TextBlock Text="{Binding LastWorkout, StringFormat='Last: {0:MM/dd/yy}'}"
+								   FontSize="11"
+								   Foreground="#94A3B8"/>
+					</StackPanel>
+				</Border>
+
+			</Grid>
+
+			<!-- E1RM Chart Card -->
+			<Border Background="White"
+					Padding="32"
+					CornerRadius="16"
+					BoxShadow="0 1 3 0 #15000000">
+				<StackPanel Spacing="20">
+					<TextBlock Text="Estimated 1RM Progress"
+							   FontSize="20"
+							   FontWeight="Bold"
+							   Foreground="#1E293B"/>
+					<Border x:Name="E1RMChartContainer"
+							Background="White"
+							Height="320"/>
+				</StackPanel>
+			</Border>
+
+			<!-- Volume Chart Card -->
+			<Border Background="White"
+					Padding="32"
+					CornerRadius="16"
+					BoxShadow="0 1 3 0 #15000000">
+				<StackPanel Spacing="20">
+					<TextBlock Text="Training Volume Over Time"
+							   FontSize="20"
+							   FontWeight="Bold"
+							   Foreground="#1E293B"/>
+					<Border x:Name="VolumeChartContainer"
+							Background="White"
+							Height="320"/>
+				</StackPanel>
+			</Border>
+
+			<!-- Max Weight Chart Card -->
+			<Border Background="White"
+					Padding="32"
+					CornerRadius="16"
+					BoxShadow="0 1 3 0 #15000000">
+				<StackPanel Spacing="20">
+					<TextBlock Text="Max Weight Per Session"
+							   FontSize="20"
+							   FontWeight="Bold"
+							   Foreground="#1E293B"/>
+					<Border x:Name="MaxWeightChartContainer"
+							Background="White"
+							Height="320"/>
+				</StackPanel>
+			</Border>
+
+			<!-- Status Message -->
+			<TextBlock Text="{Binding StatusMessage}"
+					   Foreground="#94A3B8"
+					   FontSize="13"
+					   HorizontalAlignment="Center"
+					   Margin="0,0,0,32"/>
+
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>

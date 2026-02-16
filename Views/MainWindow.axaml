@@ -1,0 +1,151 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:HealthOptimizer.ViewModels"
+        xmlns:views="using:HealthOptimizer.Views"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="900"
+        x:Class="HealthOptimizer.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Health Optimizer"
+        Width="1400"
+        Height="900"
+        MinWidth="1200"
+        MinHeight="700"
+        Background="#F5F7FA">
+
+	<Grid ColumnDefinitions="280,*">
+
+		<!-- Modern Sidebar -->
+		<Border Grid.Column="0"
+				Background="#1E293B"
+				BoxShadow="4 0 20 0 #20000000">
+
+			<StackPanel>
+
+				<!-- App Header -->
+				<Border Padding="30,40,30,30" Background="#0F172A">
+					<StackPanel Spacing="8">
+						<TextBlock Text="Health"
+								   FontSize="28"
+								   FontWeight="Bold"
+								   Foreground="White"/>
+						<TextBlock Text="Optimizer"
+								   FontSize="28"
+								   FontWeight="Bold"
+								   Foreground="#3B82F6"/>
+						<TextBlock Text="Track. Analyze. Optimize."
+								   FontSize="12"
+								   Foreground="#64748B"
+								   Margin="0,8,0,0"/>
+					</StackPanel>
+				</Border>
+
+				<!-- Navigation Items -->
+				<StackPanel Margin="0,20,0,0">
+
+					<Button x:Name="DashboardBtn"
+							Classes="nav-button"
+							Content="Dashboard"
+							Click="ShowDashboard"/>
+
+					<Button x:Name="AnalysisBtn"
+							Classes="nav-button"
+							Content="Carbs vs BP"
+							Click="ShowAnalysis"/>
+
+					<Button x:Name="MultiVarBtn"
+        Classes="nav-button"
+        Content="Multi-Variable"
+        Click="ShowMultiVar"/>
+
+					<Button x:Name="StrengthBtn"
+							Classes="nav-button"
+							Content="Strength Progress"
+							Click="ShowStrength"/>
+
+					<Separator Margin="20,15,20,15" Background="#334155"/>
+
+					<TextBlock Text="LOGGING"
+							   FontSize="11"
+							   FontWeight="SemiBold"
+							   Foreground="#64748B"
+							   Margin="20,10,0,10"/>
+
+					<Button x:Name="DailyLogBtn"
+							Classes="nav-button"
+							Content="Daily Log"
+							Click="ShowDailyLog"/>
+
+					<Button x:Name="BPBtn"
+							Classes="nav-button"
+							Content="Blood Pressure"
+							Click="ShowBloodPressure"/>
+
+					<Button x:Name="WorkoutBtn"
+							Classes="nav-button"
+							Content="Workouts"
+							Click="ShowWorkout"/>
+
+					<Button x:Name="MeasurementsBtn"
+							Classes="nav-button"
+							Content="Body Measurements"
+							Click="ShowMeasurements"/>
+
+				</StackPanel>
+
+			</StackPanel>
+
+		</Border>
+
+		<!-- Main Content Area -->
+		<Border Grid.Column="1"
+				Background="#F5F7FA"
+				Padding="0">
+
+			<!-- Content Container with different views -->
+			<Panel x:Name="ContentPanel">
+				<views:DashboardView x:Name="DashboardContent" IsVisible="True"/>
+				<views:CorrelationView x:Name="AnalysisContent" IsVisible="False"/>
+				<views:StrengthProgressView x:Name="StrengthContent" IsVisible="False"/>
+				<views:DailyLogView x:Name="DailyLogContent" IsVisible="False"/>
+				<views:BloodPressureView x:Name="BPContent" IsVisible="False"/>
+				<views:WorkoutLogView x:Name="WorkoutContent" IsVisible="False"/>
+				<views:BodyMeasurementsView x:Name="MeasurementsContent" IsVisible="False"/>
+				<views:MultiVariableAnalysisView x:Name="MultiVarContent" IsVisible="False"/>
+			</Panel>
+
+		</Border>
+
+	</Grid>
+
+	<Window.Styles>
+
+		<!-- Navigation Button Style -->
+		<Style Selector="Button.nav-button">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Foreground" Value="#94A3B8"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="Padding" Value="20,14"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="HorizontalContentAlignment" Value="Left"/>
+			<Setter Property="FontSize" Value="15"/>
+			<Setter Property="FontWeight" Value="Medium"/>
+			<Setter Property="Cursor" Value="Hand"/>
+			<Setter Property="Margin" Value="12,2"/>
+			<Setter Property="CornerRadius" Value="8"/>
+		</Style>
+
+		<Style Selector="Button.nav-button:pointerover">
+			<Setter Property="Background" Value="#334155"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+
+		<Style Selector="Button.nav-button.active">
+			<Setter Property="Background" Value="#3B82F6"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+
+	</Window.Styles>
+
+</Window>

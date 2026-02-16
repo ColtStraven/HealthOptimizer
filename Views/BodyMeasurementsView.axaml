@@ -1,0 +1,355 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:HealthOptimizer.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1120" d:DesignHeight="900"
+             x:Class="HealthOptimizer.Views.BodyMeasurementsView"
+             x:DataType="vm:BodyMeasurementsViewModel"
+             Background="#F5F7FA">
+
+	<ScrollViewer>
+		<StackPanel Margin="40" Spacing="32" MaxWidth="1000">
+
+			<!-- Page Header -->
+			<StackPanel Spacing="8">
+				<TextBlock Text="Body Measurements"
+						   FontSize="36"
+						   FontWeight="Bold"
+						   Foreground="#1E293B"/>
+				<TextBlock Text="Track your body composition progress"
+						   FontSize="16"
+						   Foreground="#64748B"/>
+			</StackPanel>
+
+			<!-- Stats Cards -->
+			<Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto">
+
+				<Border Grid.Column="0"
+						Background="White"
+						Padding="24"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000"
+						Margin="0,0,12,0">
+					<StackPanel Spacing="8">
+						<TextBlock Text="WAIST"
+								   FontSize="13"
+								   FontWeight="SemiBold"
+								   Foreground="#64748B"/>
+						<TextBlock Text="{Binding LatestWaist, StringFormat='{}{0:F1}″'}"
+								   FontSize="32"
+								   FontWeight="Bold"
+								   Foreground="#F59E0B"/>
+						<TextBlock Text="{Binding WaistChange, StringFormat='{}{0:+0.00;-0.00;--}″'}"
+								   FontSize="14"
+								   Foreground="#94A3B8"/>
+					</StackPanel>
+				</Border>
+
+				<Border Grid.Column="1"
+						Background="White"
+						Padding="24"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000"
+						Margin="6,0,6,0">
+					<StackPanel Spacing="8">
+						<TextBlock Text="CHEST"
+								   FontSize="13"
+								   FontWeight="SemiBold"
+								   Foreground="#64748B"/>
+						<TextBlock Text="{Binding LatestChest, StringFormat='{}{0:F1}″'}"
+								   FontSize="32"
+								   FontWeight="Bold"
+								   Foreground="#3B82F6"/>
+						<TextBlock Text="{Binding ChestChange, StringFormat='{}{0:+0.00;-0.00;--}″'}"
+								   FontSize="14"
+								   Foreground="#94A3B8"/>
+					</StackPanel>
+				</Border>
+
+				<Border Grid.Column="2"
+						Background="White"
+						Padding="24"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000"
+						Margin="6,0,6,0">
+					<StackPanel Spacing="8">
+						<TextBlock Text="ARMS (AVG)"
+								   FontSize="13"
+								   FontWeight="SemiBold"
+								   Foreground="#64748B"/>
+						<TextBlock Text="{Binding LatestArms, StringFormat='{}{0:F1}″'}"
+								   FontSize="32"
+								   FontWeight="Bold"
+								   Foreground="#10B981"/>
+						<TextBlock Text="{Binding ArmsChange, StringFormat='{}{0:+0.00;-0.00;--}″'}"
+								   FontSize="14"
+								   Foreground="#94A3B8"/>
+					</StackPanel>
+				</Border>
+
+				<Border Grid.Column="3"
+						Background="White"
+						Padding="24"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000"
+						Margin="12,0,0,0">
+					<StackPanel Spacing="8">
+						<TextBlock Text="THIGHS (AVG)"
+								   FontSize="13"
+								   FontWeight="SemiBold"
+								   Foreground="#64748B"/>
+						<TextBlock Text="{Binding LatestThighs, StringFormat='{}{0:F1}″'}"
+								   FontSize="32"
+								   FontWeight="Bold"
+								   Foreground="#8B5CF6"/>
+						<TextBlock Text="{Binding ThighsChange, StringFormat='{}{0:+0.00;-0.00;--}″'}"
+								   FontSize="14"
+								   Foreground="#94A3B8"/>
+					</StackPanel>
+				</Border>
+
+			</Grid>
+
+			<!-- Record Measurements Card -->
+			<Border Background="White"
+					Padding="40"
+					CornerRadius="16"
+					BoxShadow="0 1 3 0 #15000000">
+
+				<StackPanel Spacing="28">
+
+					<TextBlock Text="Record New Measurements"
+							   FontSize="20"
+							   FontWeight="Bold"
+							   Foreground="#1E293B"/>
+
+					<!-- Date -->
+					<StackPanel Spacing="12">
+						<TextBlock Text="Date"
+								   FontSize="14"
+								   FontWeight="SemiBold"
+								   Foreground="#475569"/>
+						<DatePicker SelectedDate="{Binding MeasurementDate}"
+									HorizontalAlignment="Left"
+									MinWidth="200"/>
+					</StackPanel>
+
+					<TextBlock Text="Enter measurements (leave at 0 to skip):"
+							   FontSize="13"
+							   Foreground="#94A3B8"
+							   Margin="0,0,0,8"/>
+
+					<!-- Measurements Grid -->
+					<Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto">
+
+						<StackPanel Grid.Row="0" Grid.Column="0" Spacing="12" Margin="0,0,12,16">
+							<TextBlock Text="Waist (inches)"
+									   FontSize="14"
+									   FontWeight="SemiBold"
+									   Foreground="#475569"/>
+							<TextBox Text="{Binding WaistInches}"
+									 Watermark="32.5"
+									 Height="44"
+									 FontSize="15"
+									 Padding="12"/>
+						</StackPanel>
+
+						<StackPanel Grid.Row="0" Grid.Column="1" Spacing="12" Margin="12,0,0,16">
+							<TextBlock Text="Chest (inches)"
+									   FontSize="14"
+									   FontWeight="SemiBold"
+									   Foreground="#475569"/>
+							<TextBox Text="{Binding ChestInches}"
+									 Watermark="42.0"
+									 Height="44"
+									 FontSize="15"
+									 Padding="12"/>
+						</StackPanel>
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Spacing="12" Margin="0,0,12,16">
+							<TextBlock Text="Left Arm (inches)"
+									   FontSize="14"
+									   FontWeight="SemiBold"
+									   Foreground="#475569"/>
+							<TextBox Text="{Binding LeftArmInches}"
+									 Watermark="15.5"
+									 Height="44"
+									 FontSize="15"
+									 Padding="12"/>
+						</StackPanel>
+
+						<StackPanel Grid.Row="1" Grid.Column="1" Spacing="12" Margin="12,0,0,16">
+							<TextBlock Text="Right Arm (inches)"
+									   FontSize="14"
+									   FontWeight="SemiBold"
+									   Foreground="#475569"/>
+							<TextBox Text="{Binding RightArmInches}"
+									 Watermark="15.5"
+									 Height="44"
+									 FontSize="15"
+									 Padding="12"/>
+						</StackPanel>
+
+						<StackPanel Grid.Row="2" Grid.Column="0" Spacing="12" Margin="0,0,12,16">
+							<TextBlock Text="Left Thigh (inches)"
+									   FontSize="14"
+									   FontWeight="SemiBold"
+									   Foreground="#475569"/>
+							<TextBox Text="{Binding LeftThighInches}"
+									 Watermark="24.0"
+									 Height="44"
+									 FontSize="15"
+									 Padding="12"/>
+						</StackPanel>
+
+						<StackPanel Grid.Row="2" Grid.Column="1" Spacing="12" Margin="12,0,0,16">
+							<TextBlock Text="Right Thigh (inches)"
+									   FontSize="14"
+									   FontWeight="SemiBold"
+									   Foreground="#475569"/>
+							<TextBox Text="{Binding RightThighInches}"
+									 Watermark="24.0"
+									 Height="44"
+									 FontSize="15"
+									 Padding="12"/>
+						</StackPanel>
+
+						<StackPanel Grid.Row="3" Grid.Column="0" Spacing="12" Margin="0,0,12,0">
+							<TextBlock Text="Neck (inches)"
+									   FontSize="14"
+									   FontWeight="SemiBold"
+									   Foreground="#475569"/>
+							<TextBox Text="{Binding NeckInches}"
+									 Watermark="16.0"
+									 Height="44"
+									 FontSize="15"
+									 Padding="12"/>
+						</StackPanel>
+
+						<StackPanel Grid.Row="3" Grid.Column="1" Spacing="12" Margin="12,0,0,0">
+							<TextBlock Text="Hips (inches)"
+									   FontSize="14"
+									   FontWeight="SemiBold"
+									   Foreground="#475569"/>
+							<TextBox Text="{Binding HipsInches}"
+									 Watermark="38.0"
+									 Height="44"
+									 FontSize="15"
+									 Padding="12"/>
+						</StackPanel>
+
+					</Grid>
+
+					<!-- Notes -->
+					<StackPanel Spacing="12">
+						<TextBlock Text="Notes"
+								   FontSize="14"
+								   FontWeight="SemiBold"
+								   Foreground="#475569"/>
+						<TextBox Text="{Binding Notes}"
+								 Watermark="Measured in the morning, relaxed..."
+								 Height="80"
+								 AcceptsReturn="True"
+								 TextWrapping="Wrap"
+								 FontSize="15"
+								 Padding="12"/>
+					</StackPanel>
+
+					<!-- Save Button -->
+					<Button Content="Save Measurements"
+							Command="{Binding SaveCommand}"
+							HorizontalAlignment="Left"
+							MinWidth="200"
+							Height="48"
+							FontSize="16"
+							FontWeight="SemiBold"
+							Background="#3B82F6"
+							Foreground="White"
+							CornerRadius="8"
+							Margin="0,8,0,0"
+							Cursor="Hand"/>
+
+					<!-- Status Message -->
+					<TextBlock Text="{Binding StatusMessage}"
+							   Foreground="#10B981"
+							   FontWeight="SemiBold"
+							   FontSize="14"/>
+
+				</StackPanel>
+
+			</Border>
+
+			<!-- Recent Measurements Card -->
+			<Border Background="White"
+					Padding="32"
+					CornerRadius="16"
+					BoxShadow="0 1 3 0 #15000000">
+
+				<StackPanel Spacing="20">
+
+					<TextBlock Text="Recent Measurements"
+							   FontSize="20"
+							   FontWeight="Bold"
+							   Foreground="#1E293B"/>
+
+					<ItemsControl ItemsSource="{Binding RecentMeasurements}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<Border Background="#F8FAFC"
+										Padding="20"
+										Margin="0,0,0,12"
+										CornerRadius="10">
+									<StackPanel Spacing="12">
+										<TextBlock Text="{Binding Date, StringFormat='{}{0:MMMM dd, yyyy}'}"
+												   FontWeight="Bold"
+												   FontSize="15"
+												   Foreground="#1E293B"/>
+										<Grid ColumnDefinitions="*,*,*,*">
+											<StackPanel Grid.Column="0">
+												<TextBlock Text="Waist" FontSize="12" Foreground="#64748B"/>
+												<TextBlock Text="{Binding WaistInches, StringFormat='{}{0:F1}″'}"
+														   FontSize="16"
+														   FontWeight="SemiBold"
+														   Foreground="#1E293B"/>
+											</StackPanel>
+											<StackPanel Grid.Column="1">
+												<TextBlock Text="Chest" FontSize="12" Foreground="#64748B"/>
+												<TextBlock Text="{Binding ChestInches, StringFormat='{}{0:F1}″'}"
+														   FontSize="16"
+														   FontWeight="SemiBold"
+														   Foreground="#1E293B"/>
+											</StackPanel>
+											<StackPanel Grid.Column="2">
+												<TextBlock Text="Arms" FontSize="12" Foreground="#64748B"/>
+												<TextBlock Text="{Binding LeftArmInches, StringFormat='L:{0:F1}″'}"
+														   FontSize="13"
+														   Foreground="#475569"/>
+												<TextBlock Text="{Binding RightArmInches, StringFormat='R:{0:F1}″'}"
+														   FontSize="13"
+														   Foreground="#475569"/>
+											</StackPanel>
+											<StackPanel Grid.Column="3">
+												<TextBlock Text="Thighs" FontSize="12" Foreground="#64748B"/>
+												<TextBlock Text="{Binding LeftThighInches, StringFormat='L:{0:F1}″'}"
+														   FontSize="13"
+														   Foreground="#475569"/>
+												<TextBlock Text="{Binding RightThighInches, StringFormat='R:{0:F1}″'}"
+														   FontSize="13"
+														   Foreground="#475569"/>
+											</StackPanel>
+										</Grid>
+									</StackPanel>
+								</Border>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+
+				</StackPanel>
+
+			</Border>
+
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>

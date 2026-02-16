@@ -1,0 +1,252 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:HealthOptimizer.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1120" d:DesignHeight="900"
+             x:Class="HealthOptimizer.Views.MultiVariableAnalysisView"
+             x:DataType="vm:MultiVariableAnalysisViewModel"
+             Background="#F5F7FA">
+
+	<ScrollViewer>
+		<StackPanel Margin="40" Spacing="32">
+
+			<!-- Page Header -->
+			<StackPanel Spacing="8">
+				<TextBlock Text="Multi-Variable Analysis"
+						   FontSize="36"
+						   FontWeight="Bold"
+						   Foreground="#1E293B"/>
+				<TextBlock Text="Advanced correlations and combined optimization"
+						   FontSize="16"
+						   Foreground="#64748B"/>
+			</StackPanel>
+
+			<!-- Protein vs Strength Section -->
+			<StackPanel Spacing="24">
+				<TextBlock Text="Protein vs Strength Gains"
+						   FontSize="24"
+						   FontWeight="Bold"
+						   Foreground="#1E293B"/>
+
+				<Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto">
+
+					<Border Grid.Column="0"
+							Background="White"
+							Padding="24"
+							CornerRadius="16"
+							BoxShadow="0 1 3 0 #15000000"
+							Margin="0,0,12,0">
+						<StackPanel Spacing="8">
+							<TextBlock Text="CORRELATION"
+									   FontSize="13"
+									   FontWeight="SemiBold"
+									   Foreground="#64748B"/>
+							<TextBlock Text="{Binding ProteinStrengthCorr, StringFormat='{}{0:F3}'}"
+									   FontSize="36"
+									   FontWeight="Bold"
+									   Foreground="#10B981"/>
+							<TextBlock Text="{Binding ProteinStrengthStrength}"
+									   FontSize="14"
+									   Foreground="#475569"/>
+						</StackPanel>
+					</Border>
+
+					<Border Grid.Column="1"
+							Background="White"
+							Padding="24"
+							CornerRadius="16"
+							BoxShadow="0 1 3 0 #15000000"
+							Margin="6,0,6,0">
+						<StackPanel Spacing="8">
+							<TextBlock Text="OPTIMAL PROTEIN"
+									   FontSize="13"
+									   FontWeight="SemiBold"
+									   Foreground="#64748B"/>
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<TextBlock Text="{Binding OptimalProteinMin, StringFormat='{}{0}g'}"
+										   FontSize="32"
+										   FontWeight="Bold"
+										   Foreground="#10B981"/>
+								<TextBlock Text="-"
+										   FontSize="32"
+										   Foreground="#94A3B8"/>
+								<TextBlock Text="{Binding OptimalProteinMax, StringFormat='{}{0}g'}"
+										   FontSize="32"
+										   FontWeight="Bold"
+										   Foreground="#10B981"/>
+							</StackPanel>
+						</StackPanel>
+					</Border>
+
+					<Border Grid.Column="2"
+							Background="White"
+							Padding="24"
+							CornerRadius="16"
+							BoxShadow="0 1 3 0 #15000000"
+							Margin="12,0,0,0">
+						<StackPanel Spacing="8" VerticalAlignment="Center">
+							<TextBlock Text="Higher protein intake correlates with better strength gains"
+									   FontSize="14"
+									   Foreground="#475569"
+									   TextWrapping="Wrap"/>
+						</StackPanel>
+					</Border>
+
+				</Grid>
+
+				<Border Background="White"
+						Padding="32"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000">
+					<StackPanel Spacing="20">
+						<TextBlock Text="Protein vs Strength Gains Chart"
+								   FontSize="18"
+								   FontWeight="SemiBold"
+								   Foreground="#1E293B"/>
+						<Border x:Name="ProteinStrengthChartContainer"
+								Background="White"
+								Height="320"/>
+					</StackPanel>
+				</Border>
+			</StackPanel>
+
+			<!-- Calories vs Weight Section -->
+			<StackPanel Spacing="24">
+				<TextBlock Text="Calories vs Weight Trend"
+						   FontSize="24"
+						   FontWeight="Bold"
+						   Foreground="#1E293B"/>
+
+				<Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto">
+
+					<Border Grid.Column="0"
+							Background="White"
+							Padding="24"
+							CornerRadius="16"
+							BoxShadow="0 1 3 0 #15000000"
+							Margin="0,0,12,0">
+						<StackPanel Spacing="8">
+							<TextBlock Text="CORRELATION"
+									   FontSize="13"
+									   FontWeight="SemiBold"
+									   Foreground="#64748B"/>
+							<TextBlock Text="{Binding CaloriesWeightCorr, StringFormat='{}{0:F3}'}"
+									   FontSize="36"
+									   FontWeight="Bold"
+									   Foreground="#3B82F6"/>
+							<TextBlock Text="{Binding CaloriesWeightStrength}"
+									   FontSize="14"
+									   Foreground="#475569"/>
+						</StackPanel>
+					</Border>
+
+					<Border Grid.Column="1"
+							Background="White"
+							Padding="24"
+							CornerRadius="16"
+							BoxShadow="0 1 3 0 #15000000"
+							Margin="6,0,6,0">
+						<StackPanel Spacing="8">
+							<TextBlock Text="CALORIE RANGE"
+									   FontSize="13"
+									   FontWeight="SemiBold"
+									   Foreground="#64748B"/>
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<TextBlock Text="{Binding OptimalCaloriesMin, StringFormat='{}{0}'}"
+										   FontSize="32"
+										   FontWeight="Bold"
+										   Foreground="#3B82F6"/>
+								<TextBlock Text="-"
+										   FontSize="32"
+										   Foreground="#94A3B8"/>
+								<TextBlock Text="{Binding OptimalCaloriesMax, StringFormat='{}{0}'}"
+										   FontSize="32"
+										   FontWeight="Bold"
+										   Foreground="#3B82F6"/>
+							</StackPanel>
+						</StackPanel>
+					</Border>
+
+					<Border Grid.Column="2"
+							Background="White"
+							Padding="24"
+							CornerRadius="16"
+							BoxShadow="0 1 3 0 #15000000"
+							Margin="12,0,0,0">
+						<StackPanel Spacing="8">
+							<TextBlock Text="WEIGHT TREND"
+									   FontSize="13"
+									   FontWeight="SemiBold"
+									   Foreground="#64748B"/>
+							<TextBlock Text="{Binding WeightTrend}"
+									   FontSize="18"
+									   FontWeight="Bold"
+									   Foreground="#1E293B"
+									   TextWrapping="Wrap"/>
+						</StackPanel>
+					</Border>
+
+				</Grid>
+
+				<Border Background="White"
+						Padding="32"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000">
+					<StackPanel Spacing="20">
+						<TextBlock Text="Calories vs Weight Chart"
+								   FontSize="18"
+								   FontWeight="SemiBold"
+								   Foreground="#1E293B"/>
+						<Border x:Name="CaloriesWeightChartContainer"
+								Background="White"
+								Height="320"/>
+					</StackPanel>
+				</Border>
+			</StackPanel>
+
+			<!-- Combined Recommendation Section -->
+			<Border Background="White"
+					Padding="40"
+					CornerRadius="16"
+					BoxShadow="0 1 3 0 #15000000">
+				<StackPanel Spacing="20">
+
+					<Grid ColumnDefinitions="*,Auto">
+						<TextBlock Grid.Column="0"
+								   Text="Combined Optimization"
+								   FontSize="24"
+								   FontWeight="Bold"
+								   Foreground="#1E293B"
+								   VerticalAlignment="Center"/>
+						<Border Grid.Column="1"
+								Background="#DBEAFE"
+								Padding="16,8"
+								CornerRadius="8">
+							<TextBlock Text="{Binding RecompStatus}"
+									   FontSize="16"
+									   FontWeight="Bold"
+									   Foreground="#1E40AF"/>
+						</Border>
+					</Grid>
+
+					<TextBlock Text="{Binding CombinedRecommendation}"
+							   TextWrapping="Wrap"
+							   FontSize="15"
+							   LineHeight="26"
+							   Foreground="#475569"
+							   FontFamily="Consolas,monospace"/>
+				</StackPanel>
+			</Border>
+
+			<!-- Status Message -->
+			<TextBlock Text="{Binding StatusMessage}"
+					   Foreground="#94A3B8"
+					   FontSize="13"
+					   HorizontalAlignment="Center"
+					   Margin="0,0,0,32"/>
+
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>

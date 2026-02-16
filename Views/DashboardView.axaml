@@ -1,0 +1,176 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:HealthOptimizer.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1120" d:DesignHeight="900"
+             x:Class="HealthOptimizer.Views.DashboardView"
+             x:DataType="vm:DashboardViewModel"
+             Background="#F5F7FA">
+
+	<ScrollViewer>
+		<StackPanel Margin="40" Spacing="32">
+
+			<!-- Page Header -->
+			<StackPanel Spacing="8">
+				<TextBlock Text="Dashboard"
+						   FontSize="36"
+						   FontWeight="Bold"
+						   Foreground="#1E293B"/>
+				<TextBlock Text="Your health metrics at a glance"
+						   FontSize="16"
+						   Foreground="#64748B"/>
+			</StackPanel>
+
+			<!-- Stats Cards -->
+			<Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto">
+
+				<!-- Days Logged Card -->
+				<Border Grid.Column="0"
+						Background="White"
+						Padding="24"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000"
+					Margin="0,0,12,0">
+					<StackPanel Spacing="8">
+						<TextBlock Text="DAYS LOGGED"
+           FontSize="13"
+           FontWeight="SemiBold"
+           Foreground="#64748B"/>
+						<TextBlock Text="{Binding TotalDaysLogged}"
+								   FontSize="36"
+								   FontWeight="Bold"
+								   Foreground="#3B82F6"/>
+					</StackPanel>
+				</Border>
+
+				<!-- Average Weight Card -->
+				<Border Grid.Column="1"
+						Background="White"
+						Padding="24"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000"
+					Margin="6,0,6,0">
+
+					<StackPanel Spacing="8">
+						<TextBlock Text="AVG WEIGHT"
+								   FontSize="13"
+           FontWeight="SemiBold"
+           Foreground="#64748B"/>
+						<TextBlock Text="{Binding AverageWeight, StringFormat='{}{0:F1} lbs'}"
+								   FontSize="36"
+								   FontWeight="Bold"
+								   Foreground="#10B981"/>
+					</StackPanel>
+				</Border>
+
+				<!-- Average Carbs Card -->
+				<Border Grid.Column="2"
+						Background="White"
+						Padding="24"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000"
+						Margin="6,0,6,0">
+					
+					<StackPanel Spacing="8">
+						<TextBlock Text="AVG CARBS"
+								   FontSize="13"
+           FontWeight="SemiBold"
+           Foreground="#64748B"/>
+						<TextBlock Text="{Binding AverageCarbs, StringFormat='{}{0:F1}g'}"
+								   FontSize="36"
+								   FontWeight="Bold"
+								   Foreground="#F59E0B"/>
+					</StackPanel>
+				</Border>
+
+				<!-- Average BP Card -->
+				<Border Grid.Column="3"
+						Background="White"
+						Padding="24"
+						CornerRadius="16"
+						BoxShadow="0 1 3 0 #15000000"
+						Margin="12,0,0,0">
+					<StackPanel Spacing="8">
+						<TextBlock Text="AVG BP"
+								   FontSize="13"
+           FontWeight="SemiBold"
+           Foreground="#64748B"/>
+						<TextBlock Text="{Binding AverageBP}"
+								   FontSize="36"
+								   FontWeight="Bold"
+								   Foreground="#EF4444"/>
+						<TextBlock Text="{Binding BPReadingsCount, StringFormat='{}({0} readings)'}"
+								   FontSize="12"
+								   Foreground="#94A3B8"/>
+					</StackPanel>
+				</Border>
+
+			</Grid>
+
+			<!-- Charts Section -->
+			<TextBlock Text="Trends"
+					   FontSize="24"
+					   FontWeight="Bold"
+					   Foreground="#1E293B"
+					   Margin="0,16,0,0"/>
+
+			<!-- Weight Chart Card -->
+			<Border Background="White"
+					Padding="32"
+					CornerRadius="16"
+					BoxShadow="0 1 3 0 #15000000">
+				<StackPanel Spacing="20">
+					<TextBlock Text="Weight Trend"
+							   FontSize="18"
+							   FontWeight="SemiBold"
+							   Foreground="#1E293B"/>
+					<Border x:Name="WeightChartContainer"
+							Background="White"
+							Height="280"/>
+				</StackPanel>
+			</Border>
+
+			<!-- BP Chart Card -->
+			<Border Background="White"
+					Padding="32"
+					CornerRadius="16"
+					BoxShadow="0 1 3 0 #15000000">
+				<StackPanel Spacing="20">
+					<TextBlock Text="Blood Pressure Trend"
+							   FontSize="18"
+							   FontWeight="SemiBold"
+							   Foreground="#1E293B"/>
+					<Border x:Name="BPChartContainer"
+							Background="White"
+							Height="280"/>
+				</StackPanel>
+			</Border>
+
+			<!-- Carbs Chart Card -->
+			<Border Background="White"
+					Padding="32"
+					CornerRadius="16"
+					BoxShadow="0 1 3 0 #15000000">
+				<StackPanel Spacing="20">
+					<TextBlock Text="Carbs Intake Trend"
+							   FontSize="18"
+							   FontWeight="SemiBold"
+							   Foreground="#1E293B"/>
+					<Border x:Name="CarbsChartContainer"
+							Background="White"
+							Height="280"/>
+				</StackPanel>
+			</Border>
+
+			<!-- Status Message -->
+			<TextBlock Text="{Binding StatusMessage}"
+					   Foreground="#94A3B8"
+					   FontSize="13"
+					   HorizontalAlignment="Center"
+					   Margin="0,8,0,32"/>
+
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>
