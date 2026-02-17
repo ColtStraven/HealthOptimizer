@@ -1,5 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using HealthOptimizer.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,6 +16,9 @@ namespace HealthOptimizer.Views
         {
             InitializeComponent();
             SetupNavigation();
+
+            // Check for updates on startup
+            CheckForUpdates();
         }
 
         private void SetupNavigation()
@@ -76,6 +81,26 @@ namespace HealthOptimizer.Views
                 kvp.IsVisible = false;
             }
             content.IsVisible = true;
+        }
+
+        private async void CheckForUpdates()
+        {
+            try
+            {
+                var updateService = new UpdateService();
+                var updateInfo = await updateService.CheckForUpdatesAsync();
+
+                if (updateInfo != null)
+                {
+                    var updateWindow = new UpdateWindow(updateInfo);
+                    await updateWindow.ShowDialog(this);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Silently fail - don't interrupt user experience
+                Console.WriteLine($"Update check failed: {ex.Message}");
+            }
         }
     }
 }

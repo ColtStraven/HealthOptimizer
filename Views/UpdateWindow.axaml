@@ -1,0 +1,116 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="400"
+        x:Class="HealthOptimizer.Views.UpdateWindow"
+        Title="Update Available"
+        Width="500"
+        Height="400"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        Background="#F5F7FA">
+
+	<Border Padding="40">
+		<StackPanel Spacing="24">
+
+			<!-- Icon/Header -->
+			<StackPanel Spacing="12" HorizontalAlignment="Center">
+				<TextBlock Text="🎉"
+						   FontSize="48"
+						   HorizontalAlignment="Center"/>
+				<TextBlock Text="Update Available!"
+						   FontSize="24"
+						   FontWeight="Bold"
+						   Foreground="#1E293B"
+						   HorizontalAlignment="Center"/>
+			</StackPanel>
+
+			<!-- Version Info -->
+			<Border Background="White"
+					Padding="20"
+					CornerRadius="12"
+					BoxShadow="0 1 3 0 #15000000">
+				<StackPanel Spacing="8">
+					<TextBlock x:Name="VersionText"
+							   Text="Version 1.1.0 is available!"
+							   FontSize="16"
+							   FontWeight="SemiBold"
+							   Foreground="#1E293B"/>
+					<TextBlock x:Name="ReleaseDateText"
+							   Text="Released: January 15, 2026"
+							   FontSize="13"
+							   Foreground="#64748B"/>
+				</StackPanel>
+			</Border>
+
+			<!-- Release Notes -->
+			<Border Background="White"
+					Padding="20"
+					CornerRadius="12"
+					BoxShadow="0 1 3 0 #15000000"
+					MaxHeight="150">
+				<StackPanel Spacing="8">
+					<TextBlock Text="What's New:"
+							   FontSize="14"
+							   FontWeight="SemiBold"
+							   Foreground="#475569"/>
+					<ScrollViewer MaxHeight="100">
+						<TextBlock x:Name="ReleaseNotesText"
+								   Text="Release notes will appear here..."
+								   TextWrapping="Wrap"
+								   FontSize="13"
+								   Foreground="#64748B"/>
+					</ScrollViewer>
+				</StackPanel>
+			</Border>
+
+			<!-- Download Progress -->
+			<StackPanel x:Name="ProgressPanel"
+						Spacing="8"
+						IsVisible="False">
+				<TextBlock x:Name="ProgressText"
+						   Text="Downloading update..."
+						   FontSize="13"
+						   Foreground="#64748B"
+						   HorizontalAlignment="Center"/>
+				<ProgressBar x:Name="DownloadProgress"
+							 Height="8"
+							 Minimum="0"
+							 Maximum="100"
+							 Value="0"/>
+			</StackPanel>
+
+			<!-- Buttons -->
+			<Grid ColumnDefinitions="*,*">
+				<Button x:Name="UpdateButton"
+						Grid.Column="0"
+						Content="Update Now"
+						Height="44"
+						FontSize="15"
+						FontWeight="SemiBold"
+						Background="#3B82F6"
+						Foreground="White"
+						CornerRadius="8"
+						Margin="0,0,8,0"
+						Click="UpdateButton_Click"
+						Cursor="Hand"/>
+
+				<Button x:Name="LaterButton"
+						Grid.Column="1"
+						Content="Later"
+						Height="44"
+						FontSize="15"
+						FontWeight="SemiBold"
+						Background="#E2E8F0"
+						Foreground="#475569"
+						CornerRadius="8"
+						Margin="8,0,0,0"
+						Click="LaterButton_Click"
+						Cursor="Hand"/>
+			</Grid>
+
+		</StackPanel>
+	</Border>
+
+</Window>

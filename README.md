@@ -139,6 +139,43 @@ The app works out-of-the-box with sensible defaults. No configuration needed!
 ### Multi-Variable Analysis
 *Advanced insights combining all variables*
 
+## 🚀 Releases & Updates
+
+### Creating a Release
+
+1. Update version in `UpdateService.cs`:
+```csharp
+private const string CURRENT_VERSION = "1.1.0"; // Update this
+```
+
+2. Build for multiple platforms:
+```bash
+# Windows
+dotnet publish -c Release -r win-x64 --self-contained -p:PublishSingleFile=true
+
+# Linux
+dotnet publish -c Release -r linux-x64 --self-contained -p:PublishSingleFile=true
+
+# macOS
+dotnet publish -c Release -r osx-x64 --self-contained -p:PublishSingleFile=true
+```
+
+3. Create ZIP files:
+   - `HealthOptimizer-v1.1.0-win-x64.zip`
+   - `HealthOptimizer-v1.1.0-linux-x64.zip`
+   - `HealthOptimizer-v1.1.0-osx-x64.zip`
+
+4. Create GitHub Release:
+   - Go to Releases → Draft a new release
+   - Tag: `v1.1.0`
+   - Title: `Version 1.1.0`
+   - Attach all ZIP files
+   - Publish release
+
+### Auto-Update
+
+The app automatically checks for updates on startup and notifies users when a new version is available. Users can choose to update immediately or continue using the current version.
+
 ## 🤝 Contributing
 
 This is a personal project, but suggestions and bug reports are welcome!
