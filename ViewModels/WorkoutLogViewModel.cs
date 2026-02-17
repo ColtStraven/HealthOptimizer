@@ -1,10 +1,11 @@
-﻿using System;
+﻿using HealthOptimizer.Data;
+using HealthOptimizer.Models;
+using ReactiveUI;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using ReactiveUI;
-using HealthOptimizer.Models;
-using HealthOptimizer.Data;
 
 namespace HealthOptimizer.ViewModels
 {
@@ -19,6 +20,28 @@ namespace HealthOptimizer.ViewModels
         private int _rpe = 7;
         private string _notes = string.Empty;
         private string _statusMessage = string.Empty;
+        private bool _isBodyweightExercise;
+        private string _bodyweightUnit = "Reps";
+
+        public bool IsBodyweightExercise
+        {
+            get => _isBodyweightExercise;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _isBodyweightExercise, value);
+                if (value)
+                {
+                    Weight = 0; // Bodyweight exercises have 0 external weight
+                    BodyweightUnit = "Reps";
+                }
+            }
+        }
+
+        public string BodyweightUnit
+        {
+            get => _bodyweightUnit;
+            set => this.RaiseAndSetIfChanged(ref _bodyweightUnit, value);
+        }
 
         public DateTimeOffset WorkoutDate
         {
@@ -39,7 +62,16 @@ namespace HealthOptimizer.ViewModels
         public string SelectedExerciseName
         {
             get => _selectedExerciseName;
-            set => this.RaiseAndSetIfChanged(ref _selectedExerciseName, value);
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedExerciseName, value);
+
+                // Auto-detect if this is a bodyweight exercise
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    IsBodyweightExercise = _bodyweightExercises.Contains(value);
+                }
+            }
         }
 
         public int Sets
@@ -84,13 +116,34 @@ namespace HealthOptimizer.ViewModels
         };
 
         public ObservableCollection<string> CommonExercises { get; } = new()
-        {
-            "Bench Press", "Squat", "Deadlift", "Overhead Press",
-            "Barbell Row", "Pull-ups", "Dips", "Lat Pulldown",
-            "Leg Press", "Romanian Deadlift", "Lunges",
-            "Bicep Curls", "Tricep Extensions", "Lateral Raises",
-            "Leg Curls", "Leg Extensions", "Calf Raises"
-        };
+{
+    // Weighted Exercises
+    "Bench Press", "Squat", "Deadlift", "Overhead Press",
+    "Barbell Row", "Lat Pulldown", "Leg Press",
+    "Romanian Deadlift", "Lunges", "Bicep Curls",
+    "Tricep Extensions", "Lateral Raises", "Leg Curls",
+    "Leg Extensions", "Calf Raises",
+    
+    // Bodyweight Exercises
+    "Pull-ups", "Chin-ups", "Dips", "Push-ups",
+    "Diamond Push-ups", "Decline Push-ups",
+    "Bodyweight Squats", "Bulgarian Split Squats",
+    "Pistol Squats", "Lunges (Bodyweight)",
+    "Planks", "Side Planks", "Hanging Leg Raises",
+    "L-Sits", "Muscle-ups", "Handstand Push-ups",
+    "Burpees", "Mountain Climbers", "Jump Squats"
+};
+
+        private readonly HashSet<string> _bodyweightExercises = new()
+{
+    "Pull-ups", "Chin-ups", "Dips", "Push-ups",
+    "Diamond Push-ups", "Decline Push-ups",
+    "Bodyweight Squats", "Bulgarian Split Squats",
+    "Pistol Squats", "Lunges (Bodyweight)",
+    "Planks", "Side Planks", "Hanging Leg Raises",
+    "L-Sits", "Muscle-ups", "Handstand Push-ups",
+    "Burpees", "Mountain Climbers", "Jump Squats"
+};
 
         public ObservableCollection<WorkoutSetDisplay> WorkoutSets { get; } = new();
 

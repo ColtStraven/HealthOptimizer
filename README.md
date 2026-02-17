@@ -218,6 +218,22 @@ Potential future features:
 
 This application is for informational and tracking purposes only. It is not intended to diagnose, treat, cure, or prevent any disease. Always consult with a qualified healthcare provider before making changes to your diet, exercise routine, or if you have concerns about your health, especially regarding blood pressure or cardiovascular health.
 
+## Changelog
+
+### v1.1.0 (February 2026)
+**New Features:**
+- ✨ Added bodyweight exercise support to Workout Logger
+- 💪 Expanded exercise library with 15+ bodyweight movements
+- 🎯 Auto-detection of bodyweight exercises
+- 📊 Bodyweight exercises tracked by reps when weight is 0
+
+**Improvements:**
+- Enhanced exercise dropdown with categorized exercises
+- Better handling of bodyweight movements in strength progress charts
+
+### v1.0.0 (February 2026)
+- 🎉 Initial release with all core features
+
 ---
 
 **Built with ❤️ for personal health optimization**

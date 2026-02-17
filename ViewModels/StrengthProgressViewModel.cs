@@ -211,8 +211,11 @@ namespace HealthOptimizer.ViewModels
 
         private double CalculateE1RM(double weight, int reps)
         {
+            // For bodyweight exercises (weight = 0), return reps as the metric
+            if (weight == 0) return reps;
+
             if (reps == 1) return weight;
-            return Math.Round(weight * (1 + reps / 30.0), 1);
+            return weight * (1 + reps / 30.0);
         }
     }
 }

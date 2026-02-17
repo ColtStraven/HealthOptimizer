@@ -11,7 +11,7 @@ namespace HealthOptimizer.Services
     public class UpdateService
     {
         private const string GITHUB_API_URL = "https://api.github.com/repos/ColtStraven/health-optimizer/releases/latest";
-        private const string CURRENT_VERSION = "1.0.0"; // Update this with each release
+        private const string CURRENT_VERSION = "1.1.0"; // Update this with each release
         private readonly HttpClient _httpClient;
 
         public UpdateService()
@@ -66,7 +66,7 @@ namespace HealthOptimizer.Services
             string platformIdentifier;
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                platformIdentifier = "win-x64";
+                platformIdentifier = "Setup"; // Look for installer
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 platformIdentifier = "linux-x64";
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
@@ -74,6 +74,17 @@ namespace HealthOptimizer.Services
             else
                 return null;
 
+            foreach (var asset in release.assets)
+            {
+                if (asset.name.Contains(platformIdentifier, StringComparison.OrdinalIgnoreCase) &&
+                    asset.name.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+                {
+                    return asset.browser_download_url;
+                }
+            }
+
+            // Fallback to ZIP if installer not found
+            platformIdentifier = "win-x64";
             foreach (var asset in release.assets)
             {
                 if (asset.name.Contains(platformIdentifier, StringComparison.OrdinalIgnoreCase))

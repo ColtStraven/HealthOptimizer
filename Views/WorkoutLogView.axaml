@@ -97,6 +97,17 @@
 								  HorizontalAlignment="Stretch"
 								  IsEditable="True"
 								  Height="44"/>
+
+						<!-- Bodyweight Exercise Indicator -->
+						<Border Background="#DBEAFE"
+								Padding="12,8"
+								CornerRadius="6"
+								IsVisible="{Binding IsBodyweightExercise}">
+							<TextBlock Text="💪 Bodyweight Exercise - Weight set to 0"
+									   FontSize="13"
+									   FontWeight="SemiBold"
+									   Foreground="#1E40AF"/>
+						</Border>
 					</StackPanel>
 
 					<!-- Sets, Reps, Weight -->
@@ -127,12 +138,12 @@
 						</StackPanel>
 
 						<StackPanel Grid.Column="2" Spacing="12" Margin="12,0,0,0">
-							<TextBlock Text="Weight (lbs)"
+							<TextBlock Text="Weight (lbs - 0 for bodyweight)"
 									   FontSize="14"
 									   FontWeight="SemiBold"
 									   Foreground="#475569"/>
 							<TextBox Text="{Binding Weight}"
-									 Watermark="135"
+									 Watermark="135 (or 0)"
 									 Height="44"
 									 FontSize="15"
 									 Padding="12"/>
