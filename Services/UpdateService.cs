@@ -10,7 +10,7 @@ namespace HealthOptimizer.Services
 {
     public class UpdateService
     {
-        private const string GITHUB_API_URL = "https://api.github.com/repos/ColtStraven/health-optimizer/releases/latest";
+        private const string GITHUB_API_URL = "https://api.github.com/repos/ColtStraven/HealthOptimizer/releases/latest";
         private const string CURRENT_VERSION = "1.1.0"; // Update this with each release
         private readonly HttpClient _httpClient;
 
@@ -24,21 +24,32 @@ namespace HealthOptimizer.Services
         {
             try
             {
+                Console.WriteLine($"Checking for updates at: {GITHUB_API_URL}");
+                Console.WriteLine($"Current version: {CURRENT_VERSION}");
+
                 var response = await _httpClient.GetStringAsync(GITHUB_API_URL);
+                Console.WriteLine("Successfully fetched release info from GitHub");
+
                 var release = JsonSerializer.Deserialize<GitHubRelease>(response);
 
-                if (release == null) return null;
+                if (release == null)
+                {
+                    Console.WriteLine("Failed to parse release JSON");
+                    return null;
+                }
 
                 var latestVersion = release.tag_name.TrimStart('v');
-                var currentVersion = CURRENT_VERSION;
+                Console.WriteLine($"Latest version on GitHub: {latestVersion}");
 
-                if (IsNewerVersion(latestVersion, currentVersion))
+                if (IsNewerVersion(latestVersion, CURRENT_VERSION))
                 {
-                    // Find the appropriate asset for the current platform
+                    Console.WriteLine($"Update available: {latestVersion} > {CURRENT_VERSION}");
+
                     var assetUrl = GetAssetUrlForPlatform(release);
 
                     if (assetUrl != null)
                     {
+                        Console.WriteLine($"Found download URL: {assetUrl}");
                         return new UpdateInfo
                         {
                             Version = latestVersion,
@@ -47,6 +58,14 @@ namespace HealthOptimizer.Services
                             ReleaseDate = release.published_at
                         };
                     }
+                    else
+                    {
+                        Console.WriteLine("No compatible asset found for this platform");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Already running latest version");
                 }
 
                 return null;
@@ -54,6 +73,7 @@ namespace HealthOptimizer.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Error checking for updates: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
                 return null;
             }
         }

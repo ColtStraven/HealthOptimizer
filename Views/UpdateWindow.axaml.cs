@@ -11,13 +11,19 @@ namespace HealthOptimizer.Views
         private readonly UpdateService _updateService;
         private readonly UpdateInfo _updateInfo;
 
+        public UpdateWindow() : this(new UpdateInfo())
+        {
+            InitializeComponent();
+        }
+
         public UpdateWindow(UpdateInfo updateInfo)
         {
             InitializeComponent();
             _updateService = new UpdateService();
             _updateInfo = updateInfo;
 
-            LoadUpdateInfo();
+            if (updateInfo.Version != string.Empty)
+                LoadUpdateInfo();
         }
 
         private void LoadUpdateInfo()

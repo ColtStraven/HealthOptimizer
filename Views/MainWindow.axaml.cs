@@ -102,5 +102,43 @@ namespace HealthOptimizer.Views
                 Console.WriteLine($"Update check failed: {ex.Message}");
             }
         }
+
+        private async void CheckUpdates_Click(object? sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var updateService = new UpdateService();
+                var updateInfo = await updateService.CheckForUpdatesAsync();
+
+                if (updateInfo != null)
+                {
+                    var updateWindow = new UpdateWindow(updateInfo);
+                    await updateWindow.ShowDialog(this);
+                }
+                else
+                {
+                    // Show a message that you're up to date
+                    var messageBox = new Window
+                    {
+                        Title = "No Updates",
+                        Width = 300,
+                        Height = 150,
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                        Content = new TextBlock
+                        {
+                            Text = "You're running the latest version!",
+                            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                            VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+                            FontSize = 16
+                        }
+                    };
+                    await messageBox.ShowDialog(this);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Manual update check failed: {ex.Message}");
+            }
+        }
     }
 }

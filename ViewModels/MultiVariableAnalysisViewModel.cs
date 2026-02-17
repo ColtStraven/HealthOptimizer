@@ -323,9 +323,9 @@ namespace HealthOptimizer.ViewModels
             if (recentMeasurements.Any() && oldMeasurements.Any())
             {
                 var recentWaist = recentMeasurements.Where(m => m.WaistInches.HasValue)
-                    .Average(m => m.WaistInches.Value);
+    .Average(m => m.WaistInches!.Value);
                 var oldWaist = oldMeasurements.Where(m => m.WaistInches.HasValue)
-                    .Average(m => m.WaistInches.Value);
+                    .Average(m => m.WaistInches!.Value);
                 waistDecreasing = recentWaist < oldWaist;
             }
 
