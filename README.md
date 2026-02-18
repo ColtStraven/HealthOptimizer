@@ -57,8 +57,8 @@ Modern, professional design with:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/health-optimizer.git
-cd health-optimizer
+git clone https://github.com/ColtStraven/HealthOptimizer.git
+cd HealthOptimizer
 ```
 
 2. Restore NuGet packages:
@@ -199,9 +199,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📧 Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
-
-Project Link: [https://github.com/yourusername/health-optimizer](https://github.com/yourusername/health-optimizer)
+Project Link: [https://github.com/ColtStraven/HealthOptimizer](https://github.com/ColtStraven/HealthOptimizer)
 
 ## 🎯 Roadmap
 
@@ -266,7 +264,7 @@ This application is for informational and tracking purposes only. It is not inte
 ```
 MIT License
 
-Copyright (c) 2026 [Your Name]
+Copyright (c) 2026 Colt Straven
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
