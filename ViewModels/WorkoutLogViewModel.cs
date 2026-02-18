@@ -124,25 +124,118 @@ namespace HealthOptimizer.ViewModels
     "Tricep Extensions", "Lateral Raises", "Leg Curls",
     "Leg Extensions", "Calf Raises",
     
-    // Bodyweight Exercises
-    "Pull-ups", "Chin-ups", "Dips", "Push-ups",
-    "Diamond Push-ups", "Decline Push-ups",
-    "Bodyweight Squats", "Bulgarian Split Squats",
-    "Pistol Squats", "Lunges (Bodyweight)",
-    "Planks", "Side Planks", "Hanging Leg Raises",
-    "L-Sits", "Muscle-ups", "Handstand Push-ups",
-    "Burpees", "Mountain Climbers", "Jump Squats"
+    // Push — Horizontal
+    "Wall Pushup",
+    "Incline Pushup",
+    "Pushup",
+    "Close Pushup",
+    "Archer Pushup",
+    "Pseudo Planche Pushup",
+    "One-Arm Pushup",
+    
+    // Push — Vertical
+    "Wall Pike Pushup",
+    "Pike Pushup",
+    "Elevated Pike Pushup",
+    "Decline Pushup",
+    "Handstand Hold (Wall)",
+    "Handstand Pushup (Wall)",
+    "Freestanding HSPU",
+    
+    // Pull — Horizontal
+    "Doorframe Row",
+    "Australian Row",
+    "Feet-Elevated Row",
+    "Archer Row",
+    "One-Arm Row (Assisted)",
+    "One-Arm Row",
+    
+    // Pull — Vertical
+    "Dead Hang",
+    "Scapular Pull",
+    "Negative Pullup",
+    "Banded Pullup",
+    "Pullup",
+    "L-Sit Pullup",
+    "Chest-to-Bar Pullup",
+    "Muscle Up",
+    
+    // Squat & Hinge
+    "Bodyweight Squat",
+    "Split Squat",
+    "Bulgarian Split Squat",
+    "Shrimp Squat",
+    "Pistol Squat (Assisted)",
+    "Pistol Squat",
+    "Single-Leg Hip Hinge",
+    "Single-Leg Deadlift",
+    
+    // Core
+    "Dead Bug",
+    "Hollow Hold",
+    "Plank",
+    "Long Lever Plank",
+    "Ab Wheel Rollout",
+    "Dragon Flag (Negative)",
+    "Dragon Flag"
 };
 
         private readonly HashSet<string> _bodyweightExercises = new()
 {
-    "Pull-ups", "Chin-ups", "Dips", "Push-ups",
-    "Diamond Push-ups", "Decline Push-ups",
-    "Bodyweight Squats", "Bulgarian Split Squats",
-    "Pistol Squats", "Lunges (Bodyweight)",
-    "Planks", "Side Planks", "Hanging Leg Raises",
-    "L-Sits", "Muscle-ups", "Handstand Push-ups",
-    "Burpees", "Mountain Climbers", "Jump Squats"
+    // Push — Horizontal
+    "Wall Pushup",
+    "Incline Pushup",
+    "Pushup",
+    "Close Pushup",
+    "Archer Pushup",
+    "Pseudo Planche Pushup",
+    "One-Arm Pushup",
+    
+    // Push — Vertical
+    "Wall Pike Pushup",
+    "Pike Pushup",
+    "Elevated Pike Pushup",
+    "Decline Pushup",
+    "Handstand Hold (Wall)",
+    "Handstand Pushup (Wall)",
+    "Freestanding HSPU",
+    
+    // Pull — Horizontal
+    "Doorframe Row",
+    "Australian Row",
+    "Feet-Elevated Row",
+    "Archer Row",
+    "One-Arm Row (Assisted)",
+    "One-Arm Row",
+    
+    // Pull — Vertical
+    "Dead Hang",
+    "Scapular Pull",
+    "Negative Pullup",
+    "Banded Pullup",
+    "Pullup",
+    "L-Sit Pullup",
+    "Chest-to-Bar Pullup",
+    "Muscle Up",
+    
+    // Squat & Hinge
+    "Bodyweight Squat",
+    "Split Squat",
+    "Bulgarian Split Squat",
+    "Shrimp Squat",
+    "Pistol Squat (Assisted)",
+    "Pistol Squat",
+    "Single-Leg Hip Hinge",
+    "Single-Leg Deadlift",
+    
+    // Core
+    "Dead Bug",
+    "Hollow Hold",
+    "Plank",
+    "Long Lever Plank",
+    "Ab Wheel Rollout",
+    "Dragon Flag (Negative)",
+    "Dragon Flag"
 };
 
         public ObservableCollection<WorkoutSetDisplay> WorkoutSets { get; } = new();

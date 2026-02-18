@@ -2,7 +2,7 @@
 ; Created with Inno Setup
 
 #define MyAppName "Health Optimizer"
-#define MyAppVersion "1.1.0"
+#define MyAppVersion "1.1.1"
 #define MyAppPublisher "Colt Straven"
 #define MyAppURL "https://github.com/ColtStraven/health-optimizer"
 #define MyAppExeName "HealthOptimizer.exe"

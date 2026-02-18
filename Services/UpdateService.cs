@@ -11,7 +11,7 @@ namespace HealthOptimizer.Services
     public class UpdateService
     {
         private const string GITHUB_API_URL = "https://api.github.com/repos/ColtStraven/HealthOptimizer/releases/latest";
-        private const string CURRENT_VERSION = "1.1.0"; // Update this with each release
+        private const string CURRENT_VERSION = "1.1.1"; // Update this with each release
         private readonly HttpClient _httpClient;
 
         public UpdateService()

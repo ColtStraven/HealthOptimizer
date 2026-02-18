@@ -220,6 +220,22 @@ This application is for informational and tracking purposes only. It is not inte
 
 ## Changelog
 
+### v1.1.1 (February 2026)
+**New Features:**
+- ✨ Added comprehensive bodyweight exercise library (50+ exercises)
+- 💪 Organized by movement patterns:
+  - Push — Horizontal (7 progressions)
+  - Push — Vertical (7 progressions)
+  - Pull — Horizontal (6 progressions)
+  - Pull — Vertical (8 progressions)
+  - Squat & Hinge (8 variations)
+  - Core (7 exercises)
+- 🎯 Auto-detection of bodyweight exercises (weight set to 0)
+
+**Improvements:**
+- Enhanced exercise dropdown with full calisthenics progression paths
+- Better categorization of exercises by movement type
+
 ### v1.1.0 (February 2026)
 **New Features:**
 - ✨ Added bodyweight exercise support to Workout Logger
