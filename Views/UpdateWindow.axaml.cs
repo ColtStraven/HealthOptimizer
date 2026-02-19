@@ -52,8 +52,12 @@ namespace HealthOptimizer.Views
                 progressText.Text = $"Downloading update... {percentage}%";
             });
 
-            // Download to temp folder
-            var tempPath = Path.Combine(Path.GetTempPath(), $"HealthOptimizer-Update-{_updateInfo.Version}.zip");
+            // Determine file extension from URL
+            var fileExtension = _updateInfo.DownloadUrl.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)
+                ? ".exe"
+                : ".zip";
+
+            var tempPath = Path.Combine(Path.GetTempPath(), $"HealthOptimizer-Update-{_updateInfo.Version}{fileExtension}");
 
             progressText.Text = "Downloading update...";
             var success = await _updateService.DownloadUpdateAsync(_updateInfo.DownloadUrl, tempPath, progress);

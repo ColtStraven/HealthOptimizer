@@ -11,7 +11,7 @@ namespace HealthOptimizer.Services
     public class UpdateService
     {
         private const string GITHUB_API_URL = "https://api.github.com/repos/ColtStraven/HealthOptimizer/releases/latest";
-        private const string CURRENT_VERSION = "1.1.2"; // Update this with each release
+        private const string CURRENT_VERSION = "1.1.3"; // Update this with each release
         private readonly HttpClient _httpClient;
 
         public UpdateService()
@@ -83,33 +83,63 @@ namespace HealthOptimizer.Services
             if (release.assets == null || release.assets.Length == 0)
                 return null;
 
-            string platformIdentifier;
-
+            // For Windows, prefer the installer (.exe)
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                platformIdentifier = "Setup"; // Look for installer
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                platformIdentifier = "linux-x64";
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                platformIdentifier = "osx-x64";
-            else
-                return null;
-
-            foreach (var asset in release.assets)
             {
-                if (asset.name.Contains(platformIdentifier, StringComparison.OrdinalIgnoreCase) &&
-                    asset.name.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+                // First, look for the installer
+                foreach (var asset in release.assets)
                 {
-                    return asset.browser_download_url;
+                    if (asset.name.Contains("Setup", StringComparison.OrdinalIgnoreCase) &&
+                        asset.name.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.WriteLine($"Found Windows installer: {asset.name}");
+                        return asset.browser_download_url;
+                    }
+                }
+
+                // Fallback to ZIP if no installer found
+                foreach (var asset in release.assets)
+                {
+                    if (asset.name.Contains("win-x64", StringComparison.OrdinalIgnoreCase) &&
+                        asset.name.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.WriteLine($"Found Windows ZIP: {asset.name}");
+                        return asset.browser_download_url;
+                    }
                 }
             }
-
-            // Fallback to ZIP if installer not found
-            platformIdentifier = "win-x64";
-            foreach (var asset in release.assets)
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                if (asset.name.Contains(platformIdentifier, StringComparison.OrdinalIgnoreCase))
+                foreach (var asset in release.assets)
                 {
-                    return asset.browser_download_url;
+                    if (asset.name.Contains("linux-x64", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return asset.browser_download_url;
+                    }
+                }
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                // Check if it's ARM or x64
+                if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
+                {
+                    foreach (var asset in release.assets)
+                    {
+                        if (asset.name.Contains("osx-arm64", StringComparison.OrdinalIgnoreCase))
+                        {
+                            return asset.browser_download_url;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var asset in release.assets)
+                    {
+                        if (asset.name.Contains("osx-x64", StringComparison.OrdinalIgnoreCase))
+                        {
+                            return asset.browser_download_url;
+                        }
+                    }
                 }
             }
 
@@ -146,6 +176,9 @@ namespace HealthOptimizer.Services
         {
             try
             {
+                Console.WriteLine($"Downloading from: {downloadUrl}");
+                Console.WriteLine($"Saving to: {destinationPath}");
+
                 using var response = await _httpClient.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead);
                 response.EnsureSuccessStatusCode();
 
@@ -170,6 +203,7 @@ namespace HealthOptimizer.Services
                     }
                 }
 
+                Console.WriteLine("Download completed successfully");
                 return true;
             }
             catch (Exception ex)
@@ -183,29 +217,34 @@ namespace HealthOptimizer.Services
         {
             try
             {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                // Check if it's a ZIP file (needs extraction) or an installer
+                if (installerPath.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
                 {
-                    // Launch installer and exit current app
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = installerPath,
-                        UseShellExecute = true
-                    });
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ||
-                         RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                {
-                    // Make executable and run
-                    Process.Start("chmod", $"+x \"{installerPath}\"");
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = installerPath,
-                        UseShellExecute = true
-                    });
-                }
+                    Console.WriteLine("Downloaded ZIP file. Please extract and run manually.");
 
-                // Exit the current application
-                Environment.Exit(0);
+                    // Open the folder containing the ZIP
+                    var directory = Path.GetDirectoryName(installerPath);
+                    if (directory != null && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    {
+                        Process.Start("explorer.exe", directory);
+                    }
+                }
+                else if (installerPath.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+                {
+                    // It's an installer - run it
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = installerPath,
+                        UseShellExecute = true
+                    });
+
+                    // Exit the current application
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine($"Unknown file type: {installerPath}");
+                }
             }
             catch (Exception ex)
             {
