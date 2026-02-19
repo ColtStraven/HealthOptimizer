@@ -3,10 +3,16 @@
              xmlns:vm="using:HealthOptimizer.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:converters="using:HealthOptimizer.Converters"
              mc:Ignorable="d" d:DesignWidth="1120" d:DesignHeight="900"
              x:Class="HealthOptimizer.Views.DailyLogView"
              x:DataType="vm:DailyLogViewModel"
              Background="#F5F7FA">
+
+	<UserControl.Resources>
+		<converters:StringToDoubleConverter x:Key="StringToDoubleConverter"/>
+		<converters:StringToIntConverter x:Key="StringToIntConverter"/>
+	</UserControl.Resources>
 
 	<ScrollViewer>
 		<StackPanel Margin="40" Spacing="32" MaxWidth="900">
@@ -47,13 +53,13 @@
 								   FontSize="14"
 								   FontWeight="SemiBold"
 								   Foreground="#475569"/>
-						<TextBox Text="{Binding Weight}"
-								 Watermark="Enter weight"
-								 Width="300"
-								 HorizontalAlignment="Left"
-								 Height="44"
-								 FontSize="15"
-								 Padding="12"/>
+						<TextBox Text="{Binding Weight, Converter={StaticResource StringToDoubleConverter}}"
+         Watermark="Enter weight"
+         Width="300"
+         HorizontalAlignment="Left"
+         Height="44"
+         FontSize="15"
+         Padding="12"/>
 					</StackPanel>
 
 					<!-- Calories -->
@@ -62,13 +68,13 @@
 								   FontSize="14"
 								   FontWeight="SemiBold"
 								   Foreground="#475569"/>
-						<TextBox Text="{Binding Calories}"
-								 Watermark="Total calories"
-								 Width="300"
-								 HorizontalAlignment="Left"
-								 Height="44"
-								 FontSize="15"
-								 Padding="12"/>
+						<TextBox Text="{Binding Calories, Converter={StaticResource StringToDoubleConverter}}"
+         Watermark="Total calories"
+         Width="300"
+         HorizontalAlignment="Left"
+         Height="44"
+         FontSize="15"
+         Padding="12"/>
 					</StackPanel>
 
 					<!-- Macros Section -->
@@ -85,11 +91,11 @@
 										   FontSize="14"
 										   FontWeight="SemiBold"
 										   Foreground="#475569"/>
-								<TextBox Text="{Binding ProteinGrams}"
-										 Watermark="Grams"
-										 Height="44"
-										 FontSize="15"
-										 Padding="12"/>
+								<TextBox Text="{Binding ProteinGrams, Converter={StaticResource StringToDoubleConverter}}"
+         Watermark="Grams"
+         Height="44"
+         FontSize="15"
+         Padding="12"/>
 							</StackPanel>
 
 							<StackPanel Grid.Column="1" Spacing="12" Margin="8,0,8,0">
@@ -97,11 +103,11 @@
 										   FontSize="14"
 										   FontWeight="SemiBold"
 										   Foreground="#475569"/>
-								<TextBox Text="{Binding CarbsGrams}"
-										 Watermark="Grams"
-										 Height="44"
-										 FontSize="15"
-										 Padding="12"/>
+								<TextBox Text="{Binding CarbsGrams, Converter={StaticResource StringToDoubleConverter}}"
+         Watermark="Grams"
+         Height="44"
+         FontSize="15"
+         Padding="12"/>
 							</StackPanel>
 
 							<StackPanel Grid.Column="2" Spacing="12" Margin="16,0,0,0">
@@ -109,11 +115,11 @@
 										   FontSize="14"
 										   FontWeight="SemiBold"
 										   Foreground="#475569"/>
-								<TextBox Text="{Binding FatsGrams}"
-										 Watermark="Grams"
-										 Height="44"
-										 FontSize="15"
-										 Padding="12"/>
+								<TextBox Text="{Binding FatsGrams, Converter={StaticResource StringToDoubleConverter}}"
+         Watermark="Grams"
+         Height="44"
+         FontSize="15"
+         Padding="12"/>
 							</StackPanel>
 
 						</Grid>
@@ -125,13 +131,13 @@
 								   FontSize="14"
 								   FontWeight="SemiBold"
 								   Foreground="#475569"/>
-						<TextBox Text="{Binding Steps}"
-								 Watermark="Daily steps"
-								 Width="300"
-								 HorizontalAlignment="Left"
-								 Height="44"
-								 FontSize="15"
-								 Padding="12"/>
+						<TextBox Text="{Binding Steps, Converter={StaticResource StringToIntConverter}}"
+         Watermark="Daily steps"
+         Width="300"
+         HorizontalAlignment="Left"
+         Height="44"
+         FontSize="15"
+         Padding="12"/>
 					</StackPanel>
 
 					<!-- Save Button -->

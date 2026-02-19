@@ -3,10 +3,16 @@
              xmlns:vm="using:HealthOptimizer.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:converters="using:HealthOptimizer.Converters"
              mc:Ignorable="d" d:DesignWidth="1120" d:DesignHeight="900"
              x:Class="HealthOptimizer.Views.WorkoutLogView"
              x:DataType="vm:WorkoutLogViewModel"
              Background="#F5F7FA">
+
+	<UserControl.Resources>
+		<converters:StringToDoubleConverter x:Key="StringToDoubleConverter"/>
+		<converters:StringToIntConverter x:Key="StringToIntConverter"/>
+	</UserControl.Resources>
 
 	<ScrollViewer>
 		<StackPanel Margin="40" Spacing="32" MaxWidth="1000">
@@ -118,11 +124,11 @@
 									   FontSize="14"
 									   FontWeight="SemiBold"
 									   Foreground="#475569"/>
-							<TextBox Text="{Binding Sets}"
-									 Watermark="3"
-									 Height="44"
-									 FontSize="15"
-									 Padding="12"/>
+							<TextBox Text="{Binding Sets, Converter={StaticResource StringToIntConverter}}"
+         Watermark="3"
+         Height="44"
+         FontSize="15"
+         Padding="12"/>
 						</StackPanel>
 
 						<StackPanel Grid.Column="1" Spacing="12" Margin="6,0,6,0">
@@ -130,11 +136,11 @@
 									   FontSize="14"
 									   FontWeight="SemiBold"
 									   Foreground="#475569"/>
-							<TextBox Text="{Binding Reps}"
-									 Watermark="8"
-									 Height="44"
-									 FontSize="15"
-									 Padding="12"/>
+							<TextBox Text="{Binding Reps, Converter={StaticResource StringToIntConverter}}"
+         Watermark="8"
+         Height="44"
+         FontSize="15"
+         Padding="12"/>
 						</StackPanel>
 
 						<StackPanel Grid.Column="2" Spacing="12" Margin="12,0,0,0">
@@ -142,11 +148,11 @@
 									   FontSize="14"
 									   FontWeight="SemiBold"
 									   Foreground="#475569"/>
-							<TextBox Text="{Binding Weight}"
-									 Watermark="135 (or 0)"
-									 Height="44"
-									 FontSize="15"
-									 Padding="12"/>
+							<TextBox Text="{Binding Weight, Converter={StaticResource StringToDoubleConverter}}"
+         Watermark="135 (or 0)"
+         Height="44"
+         FontSize="15"
+         Padding="12"/>
 						</StackPanel>
 
 					</Grid>
@@ -157,13 +163,13 @@
 								   FontSize="14"
 								   FontWeight="SemiBold"
 								   Foreground="#475569"/>
-						<TextBox Text="{Binding RPE}"
-								 Watermark="7"
-								 Width="300"
-								 HorizontalAlignment="Left"
-								 Height="44"
-								 FontSize="15"
-								 Padding="12"/>
+						<TextBox Text="{Binding RPE, Converter={StaticResource StringToIntConverter}}"
+         Watermark="7"
+         Width="300"
+         HorizontalAlignment="Left"
+         Height="44"
+         FontSize="15"
+         Padding="12"/>
 						<TextBlock Text="Rate of Perceived Exertion: 1=very easy, 10=maximum effort"
 								   FontSize="12"
 								   Foreground="#94A3B8"/>

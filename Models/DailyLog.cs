@@ -9,7 +9,7 @@ namespace HealthOptimizer.Models
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public double Weight { get; set; }
-        public int Calories { get; set; }
+        public double Calories { get; set; }
         public double ProteinGrams { get; set; }
         public double CarbsGrams { get; set; }
         public double FatsGrams { get; set; }

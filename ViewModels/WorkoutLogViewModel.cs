@@ -256,12 +256,6 @@ namespace HealthOptimizer.ViewModels
                 return;
             }
 
-            if (Weight <= 0)
-            {
-                StatusMessage = "⚠ Enter a weight!";
-                return;
-            }
-
             try
             {
                 using var db = new HealthOptimizerDbContext();

@@ -106,7 +106,7 @@ namespace HealthOptimizer.ViewModels
 
         // Chart data
         public List<(double Protein, double StrengthGain)> ProteinStrengthData { get; private set; } = new();
-        public List<(int Calories, double Weight)> CaloriesWeightData { get; private set; } = new();
+        public List<(double Calories, double Weight)> CaloriesWeightData { get; private set; } = new();
 
         public MultiVariableAnalysisViewModel()
         {
@@ -246,13 +246,13 @@ namespace HealthOptimizer.ViewModels
 
             // Group by week and average
             var weeklyData = dailyLogs
-                .GroupBy(d => GetWeekNumber(d.Date))
-                .Select(g => new
-                {
-                    Week = g.Key,
-                    AvgCalories = (int)g.Average(d => d.Calories),
-                    AvgWeight = g.Average(d => d.Weight)
-                })
+    .GroupBy(d => GetWeekNumber(d.Date))
+    .Select(g => new
+    {
+        Week = g.Key,
+        AvgCalories = Math.Round(g.Average(d => d.Calories), 1),
+        AvgWeight = g.Average(d => d.Weight)
+    })
                 .OrderBy(w => w.Week)
                 .ToList();
 

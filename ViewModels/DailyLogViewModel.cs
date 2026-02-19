@@ -11,7 +11,7 @@ namespace HealthOptimizer.ViewModels
     {
         private DateTimeOffset _selectedDate = DateTimeOffset.Now;
         private double _weight;
-        private int _calories;
+        private double _calories;
         private double _proteinGrams;
         private double _carbsGrams;
         private double _fatsGrams;
@@ -30,7 +30,7 @@ namespace HealthOptimizer.ViewModels
             set => this.RaiseAndSetIfChanged(ref _weight, value);
         }
 
-        public int Calories
+        public double Calories
         {
             get => _calories;
             set => this.RaiseAndSetIfChanged(ref _calories, value);
@@ -118,7 +118,8 @@ namespace HealthOptimizer.ViewModels
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Error: {ex.Message}";
+                StatusMessage = $"❌ Error saving: {ex.Message}";
+                Console.WriteLine($"Full error: {ex}");
             }
         }
 

@@ -218,6 +218,18 @@ This application is for informational and tracking purposes only. It is not inte
 
 ## Changelog
 
+### v1.0.2 (February 2026)
+**Bug Fixes:**
+- 🐛 Fixed: Calories field now accepts decimal values (e.g., 1996.6)
+- 🐛 Fixed: Empty numeric fields no longer cause crashes
+- 🐛 Fixed: Improved input validation with proper type converters
+- 🐛 Fixed: Better error handling for all data entry fields
+
+**Technical:**
+- Added StringToDoubleConverter and StringToIntConverter for robust input handling
+- Enhanced error messages in status displays
+
+
 ### v1.1.1 (February 2026)
 **New Features:**
 - ✨ Added comprehensive bodyweight exercise library (50+ exercises)

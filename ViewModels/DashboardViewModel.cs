@@ -85,7 +85,7 @@ namespace HealthOptimizer.ViewModels
                 if (dailyLogs.Any())
                 {
                     AverageWeight = Math.Round(dailyLogs.Average(d => d.Weight), 1);
-                    AverageCalories = Math.Round(dailyLogs.Average(d => d.Calories), 0);
+                    AverageCalories = Math.Round(dailyLogs.Average(d => (double)d.Calories), 1);
                     AverageCarbs = Math.Round(dailyLogs.Average(d => d.CarbsGrams), 1);
 
                     // Prepare weight chart data
